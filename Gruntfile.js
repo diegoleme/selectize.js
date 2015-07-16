@@ -206,7 +206,7 @@ module.exports = function(grunt) {
 			main: {
 				options: {
 					'banner': '/*! selectize.js - v<%= pkg.version %> | https://github.com/brianreavis/selectize.js | Apache License (v2) */\n',
-					'report': 'gzip',
+					'report': 'min',
 					'ascii-only': true
 				},
 				files: {
