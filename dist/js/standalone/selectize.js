@@ -1225,6 +1225,16 @@
 	
 			$dropdown.on('mouseenter', '[data-selectable]', function() { return self.onOptionHover.apply(self, arguments); });
 			$dropdown.on('mousedown click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
+	
+			// console.log('scroll', $dropdown, $dropdown_content);
+			// $dropdown_content.on('scroll', function() {
+			// 	console.log('scrollTop', $dropdown_content.scrollTop())
+			// 	console.log('height', $dropdown_content.height())
+			// 	console.log('scrollHeight', $dropdown_content[0].scrollHeight)
+			// 	console.log('scrollBottom', $dropdown_content[0].scrollHeight - ($dropdown_content.scrollTop() + $dropdown_content.height()))
+			// 	console.log('---')
+			// });
+	
 			watchChildEvent($control, 'mousedown', '*:not(input)', function() { return self.onItemSelect.apply(self, arguments); });
 			autoGrow($control_input);
 	
@@ -3399,6 +3409,26 @@
 	$.fn.selectize.support = {
 		validity: SUPPORTS_VALIDITY_API
 	};
+	
+	
+	Selectize.define('infinite_scroll', function(options) {
+		var self = this;
+	
+		self.setup = (function() {
+			var original = self.setup;
+			return function() {
+				original.apply(self, arguments);
+	
+				self.$dropdown_content.on('scroll', function() {
+					console.log('scrollTop', self.$dropdown_content.scrollTop())
+					console.log('height', self.$dropdown_content.height())
+					console.log('scrollHeight', self.$dropdown_content[0].scrollHeight)
+					console.log('scrollBottom', self.$dropdown_content[0].scrollHeight - (self.$dropdown_content.scrollTop() + self.$dropdown_content.height()))
+					console.log('---')
+				});
+			};
+		})();
+	});
 	
 
 	return Selectize;

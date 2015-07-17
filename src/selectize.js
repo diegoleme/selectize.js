@@ -170,6 +170,16 @@ $.extend(Selectize.prototype, {
 
 		$dropdown.on('mouseenter', '[data-selectable]', function() { return self.onOptionHover.apply(self, arguments); });
 		$dropdown.on('mousedown click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
+
+		// console.log('scroll', $dropdown, $dropdown_content);
+		// $dropdown_content.on('scroll', function() {
+		// 	console.log('scrollTop', $dropdown_content.scrollTop())
+		// 	console.log('height', $dropdown_content.height())
+		// 	console.log('scrollHeight', $dropdown_content[0].scrollHeight)
+		// 	console.log('scrollBottom', $dropdown_content[0].scrollHeight - ($dropdown_content.scrollTop() + $dropdown_content.height()))
+		// 	console.log('---')
+		// });
+
 		watchChildEvent($control, 'mousedown', '*:not(input)', function() { return self.onItemSelect.apply(self, arguments); });
 		autoGrow($control_input);
 
